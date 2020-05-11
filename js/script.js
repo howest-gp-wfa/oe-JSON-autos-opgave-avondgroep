@@ -46,21 +46,61 @@ function BindElements()
  */
 function AddEvents()
 {
-    
+    //voeg event listener toe
+    //vul de form elementen
+    slcAutos.addEventListener("change",FillFormElements);
 }
 /**
  * Fills the select list
  */
 function FillListAutos()
 {
-    
+    //vul de select list met de autos
+    jsonAutos.Autos.forEach(auto => 
+    {
+        //voeg toe aan de lijst
+        slcAutos.options.add(new Option(auto.Merk,auto.Merk));
+    });
+    //roep de FillformElements function de eerste keer aan
+    FillFormElements();
 }
 /**
  * fills the form elements
  */
 function FillFormElements()
 {
+    //haal de selectedIndex op
+    let selectedAuto = slcAutos.options[slcAutos.selectedIndex].value;
+    //haal het autoobject uit de array
+    let auto = jsonAutos.Autos.find(auto => auto.Merk == selectedAuto);
     
+    //vul de txtvakken op
+    FillTxtInfo(auto);
+    //vul de img op van de auto
+    FillAutoImg(auto.Img);
+    //vul de motor div op
+    FillMotorDiv(auto.Motor);
+    //vul de optie div
+    FillOptions(auto.Opties)
+    //vul de carInfo op
+    FillCarInfo(auto.Info);
+}
+/**
+ * fills the motor info
+ * @param {*} motor 
+ */
+function FillMotorDiv(motor)
+{
+
+}
+/**
+ * Fills the textboxes
+ * @param {*} auto 
+ */
+function FillTxtInfo(auto)
+{
+    txtMerk.value = auto.Merk;
+    txtType.value = auto.Type;
 }
 
 /**
